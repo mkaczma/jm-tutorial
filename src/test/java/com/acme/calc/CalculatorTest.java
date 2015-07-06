@@ -39,18 +39,23 @@ public class CalculatorTest {
 		Assert.assertFalse(result.isNaN());
 	}
 
-	@Test(expected = DivisorCannotBeZeroException.class)
+	@Test
 	public void divisionShouldReturnCorrectResult() {
 
 		double firstNumber = 6.0;
 		double secondNumber = 3.0;
-		double zeroNumber = 0.0;
 
-		calculator.divide(firstNumber, zeroNumber);
 		Double result = calculator.divide(firstNumber, secondNumber);
 		Assert.assertTrue(result == 2);
 		Assert.assertFalse(result.isNaN());
+	}
 
+	@Test(expected = DivisorCannotBeZeroException.class)
+	public void divisionShouldThrowDivisorCannotBeZeroException() {
+
+		double firstNumber = 6.0;
+		double secondNumber = 0.0;
+		calculator.divide(firstNumber, secondNumber);
 	}
 
 }
