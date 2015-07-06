@@ -11,7 +11,7 @@ public class PizzaOrderService {
 	private OrderFactory orderFactory;
 
 	private DeliveryTimeService deliveryTimeService;
-	
+
 	private MessageTemplateService messageTemplate;
 
 	public void createOrder(Customer customer, PizzaType type) {
@@ -38,6 +38,17 @@ public class PizzaOrderService {
 		order.cancel();
 		OrderCanceledTemplate template = messageTemplate.getCancelTemplate();
 		mailSender.send(template, order.getEmail());
+		orderDatabase.save(order);
+	}
+
+	public PizzaOrderService(MailSender mailSender, OrderDatabase orderDatabase, OrderFactory orderFactory,
+			DeliveryTimeService deliveryTimeService, MessageTemplateService messageTemplate) {
+		super();
+		this.mailSender = mailSender;
+		this.orderDatabase = orderDatabase;
+		this.orderFactory = orderFactory;
+		this.deliveryTimeService = deliveryTimeService;
+		this.messageTemplate = messageTemplate;
 	}
 
 	public void deliverOrder(String pizzaOrderId) {
