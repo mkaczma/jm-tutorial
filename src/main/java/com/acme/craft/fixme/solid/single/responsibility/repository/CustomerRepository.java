@@ -1,8 +1,6 @@
 package com.acme.craft.fixme.solid.single.responsibility.repository;
 
-import java.io.IOException;
-import java.util.logging.FileHandler;
-import java.util.logging.SimpleFormatter;
+import com.acme.craft.fixme.solid.utils.ErrorUtils;
 
 import lombok.extern.java.Log;
 
@@ -15,25 +13,8 @@ public class CustomerRepository {
 			 * do some database stuff here
 			 */
 		} catch (Exception e) {
-			handleError("database error");
+			ErrorUtils.handleError("database error");
 		}
 	}
 
-	public void handleError(String error) {
-		FileHandler fh;
-
-		try {
-			fh = new FileHandler("MyLogFile.log");
-			log.addHandler(fh);
-
-			SimpleFormatter formatter = new SimpleFormatter();
-			fh.setFormatter(formatter);
-
-			log.info(error);
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 }

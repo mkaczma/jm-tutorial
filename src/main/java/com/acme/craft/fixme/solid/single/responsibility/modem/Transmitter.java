@@ -1,8 +1,8 @@
 package com.acme.craft.fixme.solid.single.responsibility.modem;
 
-interface Modem {
+public interface Transmitter {
 
-	void dial(String pno);
+	void send(char c);
 
-	void hangup();
+	char recv();
 }
